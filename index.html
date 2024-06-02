@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap files/bootstrap.min.css" />
+    <script
+      src="https://kit.fontawesome.com/0125fa9422.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>login</title>
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="w-75 m-auto p-5 text-center bg-container">
+        <h1>Smart Login System</h1>
+        <input
+          id="signinEmail"
+          class="form-control my-3"
+          placeholder="Enter your email"
+          type="text"
+        />
+        <input
+          id="signinPassword"
+          class="form-control my-3"
+          placeholder="Enter your password"
+          type="password"
+        />
+        <p id="SigninError" class="text-danger"></p>
+        <button class="btn btn-outline-info w-100 my-3" onclick="login()">
+          Login
+        </button>
+        <p>Don't have an account? <a href="signup.html">Signup</a></p>
+      </div>
+    </div>
+    <script src="bootstrap files/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
