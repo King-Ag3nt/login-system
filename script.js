@@ -37,7 +37,7 @@ function signup() {
       password: signupinputPassword.value,
     };
     users.push(user);
-    console.log(users);
+    // console.log(users);
     signupinputName.value = "";
     signupinputEmail.value = "";
     signupinputPassword.value = "";
@@ -52,8 +52,8 @@ function signup() {
 
 var users = JSON.parse(localStorage.getItem("users")) || [];
 logedinUser = localStorage.getItem("logedinUser");
-console.log(users);
-console.log(logedinUser);
+// console.log(users);
+// console.log(logedinUser);
 
 function login() {
   for (var i = 0; i < users.length; i++) {
@@ -64,7 +64,7 @@ function login() {
       signinError.innerHTML = "";
       logedinUser = users[i].name;
       localStorage.setItem("logedinUser", logedinUser);
-      console.log(logedinUser);
+      // console.log(logedinUser);
       window.location.href = "home.html";
     } else {
       signinError.innerHTML = "Check your email and password";
