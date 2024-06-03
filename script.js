@@ -15,7 +15,7 @@ var user = {
 };
 var logedinUser = "";
 function signup() {
-  var nameValid = /^\w{4,30}$/;
+  var nameValid = /^\w{3,30}$/;
   var emailValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   var passwordValid = /^\w{6,15}\W?$/;
   var users = JSON.parse(localStorage.getItem("users")) || [];
@@ -71,14 +71,21 @@ function login() {
       localStorage.setItem("logedinUser", logedinUser);
       // console.log(logedinUser);
       window.location.href = "home.html";
-    } else {
-      signinError.innerHTML = "Check your email and password";
+    } else if (users[i].email != signinEmail.value) {
+      signinError.innerHTML = "Check your email";
+    } else if (users[i].password != signinPassword.value) {
+      signinError.innerHTML = "Check your password";
+    } else if (
+      users[i].email == signinEmail.value &&
+      users[i].password == signinPassword.value
+    ) {
+      signinError.innerHTML = "check your email and password ";
     }
   }
 }
 
 function logout() {
-  logedinUser = "";
+  logedinUser = " ";
   localStorage.setItem("logedinUser", logedinUser);
   window.location.href = "/";
 }
@@ -92,7 +99,7 @@ function welcome() {
 }
 
 function loginCheck() {
-  if (logedinUser != "") {
+  if (logedinUser.length > 2) {
     window.location.href = "home.html";
   }
 }
