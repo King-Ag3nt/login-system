@@ -58,40 +58,36 @@ function signup() {
 var users = JSON.parse(localStorage.getItem("users")) || [];
 logedinUser = localStorage.getItem("logedinUser");
 // console.log(users);
-// console.log(logedinUser);
-
+// console.log("userName " + logedinUser);
+// console.log(typeof logedinUser);
 function login() {
-  for (var i = 0; i < users.length; i++) {
-    if (
-      users[i].email == signinEmail.value &&
-      users[i].password == signinPassword.value
-    ) {
-      signinError.innerHTML = "";
-      logedinUser = users[i].name;
-      localStorage.setItem("logedinUser", logedinUser);
-      // console.log(logedinUser);
-      window.location.href = "home.html";
-    } else if (users[i].email != signinEmail.value) {
-      signinError.innerHTML = "Check your email";
-    } else if (users[i].password != signinPassword.value) {
-      signinError.innerHTML = "Check your password";
-    } else if (
-      users[i].email == signinEmail.value &&
-      users[i].password == signinPassword.value
-    ) {
-      signinError.innerHTML = "check your email and password ";
+  if (users.length > 0) {
+    for (var i = 0; i < users.length; i++) {
+      if (
+        users[i].email == signinEmail.value &&
+        users[i].password == signinPassword.value
+      ) {
+        signinError.innerHTML = "";
+        logedinUser = users[i].name;
+        localStorage.setItem("logedinUser", logedinUser);
+        window.location.href = "home.html";
+      } else {
+        signinError.innerHTML = "Check your email and password";
+      }
     }
+  } else {
+    signinError.innerHTML = "Check your email and password";
   }
 }
 
 function logout() {
-  logedinUser = " ";
+  logedinUser = "";
   localStorage.setItem("logedinUser", logedinUser);
   window.location.href = "/";
 }
 
 function welcome() {
-  if (logedinUser != "") {
+  if (typeof logedinUser == "string" && logedinUser.length > 2) {
     heading.innerHTML = `Welcome <span class="text-danger">${logedinUser}</span>`;
   } else {
     window.location.href = "/";
@@ -99,7 +95,7 @@ function welcome() {
 }
 
 function loginCheck() {
-  if (logedinUser.length > 2) {
+  if (typeof logedinUser == "string" && logedinUser.length > 2) {
     window.location.href = "home.html";
   }
 }
