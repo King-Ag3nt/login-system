@@ -19,8 +19,13 @@ function signup() {
   var emailValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   var passwordValid = /^\w{6,15}\W?$/;
   var users = JSON.parse(localStorage.getItem("users")) || [];
-
-  if (
+  if (nameValid.test(signupinputName.value) == false) {
+    signupError.innerHTML = "Please enter valid name";
+  } else if (emailValid.test(signupinputEmail.value) == false) {
+    signupError.innerHTML = "Please enter valid email";
+  } else if (passwordValid.test(signupinputPassword.value) == false) {
+    signupError.innerHTML = "Please enter valid password";
+  } else if (
     nameValid.test(signupinputName.value) &&
     emailValid.test(signupinputEmail.value) &&
     passwordValid.test(signupinputPassword.value)
@@ -70,9 +75,6 @@ function login() {
       signinError.innerHTML = "Check your email and password";
     }
   }
-  if (signinEmail.value == "" && signinPassword.value == "") {
-    signinError.innerHTML = "Please enter email and password";
-  }
 }
 
 function logout() {
@@ -83,8 +85,14 @@ function logout() {
 
 function welcome() {
   if (logedinUser != "") {
-    heading.innerHTML = "Welcome " + logedinUser;
+    heading.innerHTML = `Welcome <span class="text-danger">${logedinUser}</span>`;
   } else {
     window.location.href = "/";
+  }
+}
+
+function loginCheck() {
+  if (logedinUser != "") {
+    window.location.href = "home.html";
   }
 }
