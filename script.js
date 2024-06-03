@@ -71,8 +71,10 @@ function login() {
         logedinUser = users[i].name;
         localStorage.setItem("logedinUser", logedinUser);
         window.location.href = "home.html";
-      } else {
-        signinError.innerHTML = "Check your email and password";
+      } else if (users[i].email != signinEmail.value) {
+        signinError.innerHTML = "Check your email";
+      } else if (users[i].password != signinPassword.value) {
+        signinError.innerHTML = "Check your password";
       }
     }
   } else {
