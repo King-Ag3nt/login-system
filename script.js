@@ -15,7 +15,7 @@ var user = {
 };
 var logedinUser = "";
 function signup() {
-  var nameValid = /^\w{3,30}$/;
+  var nameValid = /^\w{3,15}(\s\w{3,15})?$/;
   var emailValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
   var passwordValid = /\w{6,15}\W?/;
   var users = JSON.parse(localStorage.getItem("users")) || [];
@@ -27,18 +27,18 @@ function signup() {
     signupError.innerHTML = "Please enter valid password";
   } else if (
     nameValid.test(signupinputName.value) &&
-    emailValid.test(signupinputEmail.value) &&
+    emailValid.test(signupinputEmail.value.toLowerCase()) &&
     passwordValid.test(signupinputPassword.value)
   ) {
     for (var i = 0; i < users.length; i++) {
-      if (users[i].email === signupinputEmail.value) {
+      if (users[i].email === signupinputEmail.value.toLowerCase()) {
         signupError.innerHTML = "Email already exists";
         return;
       }
     }
     var user = {
-      name: signupinputName.value,
-      email: signupinputEmail.value,
+      name: signupinputName.value.toLowerCase(),
+      email: signupinputEmail.value.toLowerCase(),
       password: signupinputPassword.value,
     };
     users.push(user);
@@ -57,21 +57,21 @@ function signup() {
 
 var users = JSON.parse(localStorage.getItem("users")) || [];
 logedinUser = localStorage.getItem("logedinUser");
-// console.log(users);
-// console.log("userName " + logedinUser);
-// console.log(typeof logedinUser);
+console.log(users);
+console.log("userName " + logedinUser);
+console.log(typeof logedinUser);
 function login() {
   if (users.length > 0) {
     for (var i = 0; i < users.length; i++) {
       if (
-        users[i].email == signinEmail.value &&
+        users[i].email == signinEmail.value.toLowerCase() &&
         users[i].password == signinPassword.value
       ) {
         signinError.innerHTML = "";
         logedinUser = users[i].name;
         localStorage.setItem("logedinUser", logedinUser);
         window.location.href = "home.html";
-      } else if (users[i].email != signinEmail.value) {
+      } else if (users[i].email != signinEmail.value.toLowerCase()) {
         signinError.innerHTML = "Check your email";
       } else if (users[i].password != signinPassword.value) {
         signinError.innerHTML = "Check your password";
@@ -90,7 +90,7 @@ function logout() {
 
 function welcome() {
   if (typeof logedinUser == "string" && logedinUser.length > 2) {
-    heading.innerHTML = `Welcome <span class="text-danger">${logedinUser}</span>`;
+    heading.innerHTML = `Welcome <span class="text-danger text-capitalize">${logedinUser}</span>`;
   } else {
     window.location.href = "/";
   }
