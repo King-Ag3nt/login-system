@@ -57,9 +57,9 @@ function signup() {
 
 var users = JSON.parse(localStorage.getItem("users")) || [];
 logedinUser = localStorage.getItem("logedinUser");
-console.log(users);
-console.log("userName " + logedinUser);
-console.log(typeof logedinUser);
+// console.log(users);
+// console.log("userName " + logedinUser);
+// console.log(typeof logedinUser);
 function login() {
   if (users.length > 0) {
     for (var i = 0; i < users.length; i++) {
