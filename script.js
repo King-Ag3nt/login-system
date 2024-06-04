@@ -17,7 +17,7 @@ var logedinUser = "";
 function signup() {
   var nameValid = /^\w{3,30}$/;
   var emailValid = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  var passwordValid = /^\w{6,15}\W?$/;
+  var passwordValid = /\w{6,15}\W?/;
   var users = JSON.parse(localStorage.getItem("users")) || [];
   if (nameValid.test(signupinputName.value) == false) {
     signupError.innerHTML = "Please enter valid name";
